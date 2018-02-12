@@ -11,6 +11,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -41,7 +42,9 @@ public class CustomerServiceTest {
         customer.setId(ID);
         customer.setFirstname(NAME);
 
-        when(customerRepository.getCustomerById(anyLong())).thenReturn(customer);
+        Optional<Customer> optionalCustomer = Optional.of(customer);
+
+        when(customerRepository.findById(anyLong())).thenReturn(optionalCustomer);
 
         //when
         CustomerDTO customerById = customerService.getCustomerById(ID);
