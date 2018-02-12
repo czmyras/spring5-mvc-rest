@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.xml.ws.Response;
-
 @Controller
 @RequestMapping("/api/v1/categories/")
 public class CategoryController {
@@ -24,13 +22,13 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<CategoryListDTO> getAllCategories() {
-        return new ResponseEntity<CategoryListDTO>(
+        return new ResponseEntity<>(
                 new CategoryListDTO(categoryService.getAllCategories()), HttpStatus.OK);
     }
 
     @GetMapping("{name}")
     public ResponseEntity<CategoryDTO> getCategoryByName(@PathVariable String name) {
-        return new ResponseEntity<CategoryDTO>(
+        return new ResponseEntity<>(
                 categoryService.getCategoryByName(name), HttpStatus.OK);
     }
 
