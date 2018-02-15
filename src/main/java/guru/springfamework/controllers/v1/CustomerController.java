@@ -9,8 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/v1/customers")
+@RequestMapping(CustomerController.BASE_URL)
+//@RequestMapping("${some.url.value}")
 public class CustomerController {
+
+    public static final String BASE_URL = "/api/v1/customers";
 
     CustomerService customerService;
 
@@ -46,5 +49,11 @@ public class CustomerController {
     }
 
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable Long id) {
 
+        customerService.deleteCustomerById(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
